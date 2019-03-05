@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" />
+  <link rel="stylesheet" href="./assets/styles/layout.css" />
   <title>Document</title>
 
   <script>
@@ -21,21 +22,304 @@
   #mfPreviewBar{
     display:none !important;
   }
-  .tablet-gothic-bold{
-    font-family: 'Tablet Gothic Bold', Helvetica, sans-serif;
+  body {
+    display: flex;
+    height: 100vh;
+    align-items: center;
   }
-  .tablet-gothic-semibold{
+  @media (min-width: 768px) {
+    body {
+      align-items: center;
+      height: 100vh;
+    }
+  }
+  h1 {
+    /* font-family: 'Tablet Gothic Bold', Helvetica, sans-serif; */
+    font-family: 'Tablet Gothic Semibold', Helvetica, sans-serif;
+    letter-spacing: 1px;
+  }
+  h2 {
+    font-family: 'Tablet Gothic Thin', Helvetica, sans-serif;
+  }
+  h4 {
     font-family: 'Tablet Gothic Semibold', Helvetica, sans-serif;
   }
-  .tablet-gothic-light{
+  p {
     font-family: 'Tablet Gothic Light', Helvetica, sans-serif;
   }
-  .tablet-gothic-thin{
+  .header {
+
+  }
+  .header .underline {
+    width: 120px;
+    height: 8px;
+    background-color: #cccccc;
+  }
+  @media (max-width: 768px) {
+    .header {
+      margin-bottom: 5rem;
+      text-align: center;
+    }
+    .header .underline {
+      margin: 0 auto;
+    }
+  }
+  .graph {
+    height: 290px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    /* background-color: aquamarine; */
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+  @media (min-width: 786px) {
+    .graph {
+      justify-content: start;
+      overflow: visible;
+    }
+  }
+  .graph .bar-wrap {
+    height: 100%;
+    width: 20px;
+    margin-right: 6px;
+    margin-left: 6px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .graph .bar {
+    width: 100%;
+    background-color: #cccccc;
+    position: relative;
+    /* display: flex; */
+    /* justify-content: center; */
+  }
+  .graph .bar-wrap .tooltip {
+    background-color: #e24389;
+    width: 200px;
+    height: 50px;
+    /* display: none; */
+    opacity: 0;
+    transition: opacity .3s;
+    position: absolute;
+    z-index: 1;
+    color: white;
     font-family: 'Tablet Gothic Thin', Helvetica, sans-serif;
+    text-align: center;
+    padding-top: 1rem;
+    top: 0;
+  }
+  .graph .bar-wrap:hover .tooltip {
+    /* display: block; */
+    opacity: 1;
+  }
+  .graph .bar-wrap .tooltip .pointer {
+    background-color: #e24389;
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    position: absolute;
+    bottom: -7px;
+    left: 47%;
+  }
+  .graph .bar .bar-tip {
+    height: 7px;
+    width: 100%;
+    background-color: aquamarine;
+  }
+  .copy {
+
+  }
+  @media (min-width: 768px) {
+    .copy {
+      position: relative;
+      top: -189px; 
+    }
+  }
+  .key {
+    height: 150px;
+    width: 100%;
+    /* background-color: pink; */
+    font-family: 'Tablet Gothic Thin', Helvetica, sans-serif;
+    font-size: .8rem;
+  }
+  .color {
+    background-color: yellow;
+    width: 10px;
+    height: 10px;
+  }
+  @media (min-width: 768px) {
+    .key-value {
+      display: none;
+    }
+  }
+  
+  .key-wrapper {
+    display: flex;
+    align-items: baseline;
+  }
+  .key-wrapper div {
+    margin-right: .5rem;
   }
 </style>
 <body>
-  <div class="tablet-gothic-bold">Some words here</div>
-</body>
+  <div class="container">
+    <div class="row">
+      <div class="header col-12 col-md-6">
+        <h1>University Statistics</h1>
+        <h2>2018 Course Popularity</h2>
+        <div class="underline"></div>
+      </div>
+      <div id="graph" class="graph col-12 col-md-6">
 
+        <!-- <div class="bar"><div class="bar-tip"></div></div> -->
+        
+      </div>
+      <div class="copy col-12 col-md-6">
+        <h4>Degree Backgrounds</h4>
+        <p>
+          Class nulla. At turpis turpis donec rutrum aliquam libero,
+          luctus id. Consectetuer donec laoreet, sollicitudin.
+        </p>
+        <p>
+          Wisi adipiscing montes tellus imperdiet vel eros, porttitor
+          orci est dignissim massa, lobortis diam eget augue, vivamus
+          iaculis rutrum scelerisque consectetuer.
+        </p>
+      </div>
+      <div class="key col-12 col-md-6">
+        <div id="key" class="row">
+          <!-- <div class="key-wrapper col-6 col-lg-4">
+            <div class="color"></div>
+            <div class="name">Science</div>
+          </div> -->
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</body>
+<script>
+var data = [
+  {
+    name: 'Arts',
+    value: 28,
+    color: '#208ed0'
+  },
+  {
+    name: 'Engineering',
+    value: 13,
+    color: '#9c2e99'
+  },
+  {
+    name: 'Economics',
+    value: 10,
+    color: '#3cc3c4'
+  },
+  {
+    name: 'Political Science',
+    value: 4,
+    color: '#e24289'
+  },
+  {
+    name: 'Sport Science',
+    value: 4,
+    color: '#3759a4'
+  },
+  {
+    name: 'Languages',
+    value: 4,
+    color: '#3149fe'
+  },
+  {
+    name: 'History',
+    value: 3,
+    color: '#48048e'
+  },
+  {
+    name: 'Science',
+    value: 3,
+    color: '#00a7e1'
+  },
+  {
+    name: 'Literature',
+    value: 2,
+    color: '#a50089'
+  },
+  {
+    name: 'Other',
+    value: 30,
+    color: '#929292'
+  }
+];
+
+var graph = document.getElementById('graph');
+var keys = document.getElementById('key');
+
+var makeBar = (name, value, percentage, color) => {
+  var barWrap = document.createElement('div');
+  barWrap.setAttribute('class', 'bar-wrap');
+
+  var bar = document.createElement('div');
+  bar.setAttribute('class', 'bar');
+  var tip = document.createElement('div');
+  tip.setAttribute('class', 'bar-tip');
+  tip.style.backgroundColor = color;
+
+  var tooltip = document.createElement('div');
+  tooltip.setAttribute('class', 'tooltip');
+  var toolText = document.createTextNode(name + ' - ' + value);
+  tooltip.appendChild(toolText);
+
+  var pointer = document.createElement('div');
+  pointer.setAttribute('class', 'pointer');
+  tooltip.appendChild(pointer);
+  bar.appendChild(tip);
+
+  bar.style.height = percentage+'%';
+
+  barWrap.appendChild(bar);
+  barWrap.appendChild(tooltip);
+  graph.appendChild(barWrap);
+}
+
+var makeKey = (name, value, color) => {
+  var keyWrapper = document.createElement('div');
+  keyWrapper.setAttribute('class', 'key-wrapper col-6 col-lg-4');
+
+  var nameEl = document.createElement('div');
+  nameEl.setAttribute('class', 'name');
+  var nameText = document.createTextNode(name);
+  nameEl.appendChild(nameText);
+
+  var valueEl = document.createElement('span');
+  valueEl.setAttribute('class', 'key-value');
+  var valueText = document.createTextNode(' - ' + value);
+  valueEl.appendChild(valueText);
+
+  nameEl.appendChild(valueEl);
+
+  var colorEl = document.createElement('div');
+  colorEl.setAttribute('class', 'color');
+  colorEl.style.backgroundColor = color;
+
+  keyWrapper.appendChild(colorEl);
+  keyWrapper.appendChild(nameEl);
+
+  keys.appendChild(keyWrapper);
+
+}
+var unit = 3;
+
+for(let i = 0; i < data.length; i++) {
+  makeBar(data[i].name, data[i].value, (unit * data[i].value), data[i].color);
+  makeKey(data[i].name, data[i].value, data[i].color);
+}
+
+
+</script>
 </html>
