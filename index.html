@@ -70,10 +70,9 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
-    /* background-color: aquamarine; */
     flex-wrap: nowrap;
     align-items: flex-end;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
   @media (min-width: 786px) {
     .graph {
@@ -83,7 +82,7 @@
   }
   .graph .bar-wrap {
     height: 100%;
-    width: 20px;
+    width: 28px;
     margin-right: 6px;
     margin-left: 6px;
     display: flex;
@@ -92,16 +91,15 @@
   }
   .graph .bar {
     width: 100%;
+    height: 0;
     background-color: #cccccc;
     position: relative;
-    /* display: flex; */
-    /* justify-content: center; */
+    transition: all 3s;
   }
   .graph .bar-wrap .tooltip {
     background-color: #e24389;
     width: 200px;
     height: 50px;
-    /* display: none; */
     opacity: 0;
     transition: opacity .3s;
     position: absolute;
@@ -113,7 +111,6 @@
     top: 0;
   }
   .graph .bar-wrap:hover .tooltip {
-    /* display: block; */
     opacity: 1;
   }
   .graph .bar-wrap .tooltip .pointer {
@@ -131,18 +128,17 @@
     background-color: aquamarine;
   }
   .copy {
-
+    margin-bottom: 1rem;
   }
   @media (min-width: 768px) {
     .copy {
       position: relative;
-      top: -189px; 
+      top: -175px; 
     }
   }
   .key {
     height: 150px;
     width: 100%;
-    /* background-color: pink; */
     font-family: 'Tablet Gothic Thin', Helvetica, sans-serif;
     font-size: .8rem;
   }
@@ -174,9 +170,6 @@
         <div class="underline"></div>
       </div>
       <div id="graph" class="graph col-12 col-md-6">
-
-        <!-- <div class="bar"><div class="bar-tip"></div></div> -->
-        
       </div>
       <div class="copy col-12 col-md-6">
         <h4>Degree Backgrounds</h4>
@@ -192,12 +185,7 @@
       </div>
       <div class="key col-12 col-md-6">
         <div id="key" class="row">
-          <!-- <div class="key-wrapper col-6 col-lg-4">
-            <div class="color"></div>
-            <div class="name">Science</div>
-          </div> -->
         </div>
-        
       </div>
     </div>
   </div>
@@ -280,7 +268,7 @@ var makeBar = (name, value, percentage, color) => {
   tooltip.appendChild(pointer);
   bar.appendChild(tip);
 
-  bar.style.height = percentage+'%';
+  bar.setAttribute('heightvalue', percentage);
 
   barWrap.appendChild(bar);
   barWrap.appendChild(tooltip);
@@ -319,6 +307,16 @@ for(let i = 0; i < data.length; i++) {
   makeBar(data[i].name, data[i].value, (unit * data[i].value), data[i].color);
   makeKey(data[i].name, data[i].value, data[i].color);
 }
+
+var renderedKeys = document.getElementsByClassName('bar');
+
+setTimeout(() => {
+  for(let i = 0; i < renderedKeys.length; i++) {
+    renderedKeys[i].style.height = renderedKeys[i].getAttribute('heightvalue')+'%';
+  }
+}, 100);
+
+
 
 
 </script>
