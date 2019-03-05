@@ -339,7 +339,7 @@ var renderTips = () => {
 
 var revealPage = () => {
   document.body.classList.remove('class', 'hide-page');
-  renderTips();
+  setTimeout(renderTips, 200);
 }
 
 window.addEventListener('load', revealPage);
