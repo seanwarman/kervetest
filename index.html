@@ -126,6 +126,7 @@
     height: 7px;
     width: 100%;
     background-color: aquamarine;
+    transition: all .5s;
   }
   .copy {
     margin-bottom: 1rem;
@@ -257,6 +258,7 @@ var makeBar = (name, value, percentage, color) => {
   var tip = document.createElement('div');
   tip.setAttribute('class', 'bar-tip');
   tip.style.backgroundColor = color;
+  tip.style.opacity = '0';
 
   var tooltip = document.createElement('div');
   tooltip.setAttribute('class', 'tooltip');
@@ -309,15 +311,25 @@ for(let i = 0; i < data.length; i++) {
 }
 
 var renderedKeys = document.getElementsByClassName('bar');
+var tips = document.getElementsByClassName('bar-tip');
 
-setTimeout(() => {
-  for(let i = 0; i < renderedKeys.length; i++) {
-    renderedKeys[i].style.height = renderedKeys[i].getAttribute('heightvalue')+'%';
+var num = 0;
+
+var renderTips = () => {
+  tips[num].style.opacity = '1';
+  num += 1;
+  if(num < tips.length) {
+    setTimeout(renderTips, 100);
+  } else {
+    setTimeout( () => {
+     for(let i = 0; i < renderedKeys.length; i++) {
+          renderedKeys[i].style.height = renderedKeys[i].getAttribute('heightvalue')+'%';
+      }
+    }, 100);
   }
-}, 100);
+}
 
-
-
+renderTips();
 
 </script>
 </html>
